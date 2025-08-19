@@ -24,7 +24,7 @@ def parse_args():
     ap.add_argument("-o", "--output", type=Path, help="Output file (default: stdout)")
     ap.add_argument("--s1", default="Speaker 1", help="Name for Speaker 1")
     ap.add_argument("--s2", default="Speaker 2", help="Name for Speaker 2")
-    ap.add_argument("--sep", default="\n", help="Separator between merged blocks")
+    ap.add_argument("--sep", default="\n\n", help="Separator between merged blocks")
     return ap.parse_args()
 
 def speaker_name(raw: str, s1: str, s2: str) -> str:
@@ -115,20 +115,16 @@ def clean_lines(lines, s1, s2):
     flush()
     return blocks
 
-def format_blocks(blocks, sep="\n"):
+def format_blocks(blocks, sep="\n\n"):
     out_lines = []
     last_speaker = None
     for sp, text in blocks:
         if sp != last_speaker:
-            if out_lines:
-                out_lines.append(sep)
             out_lines.append(f"{sp}: {text}")
             last_speaker = sp
         else:
-            # Merge into the previous line for same speaker
-            # Append with a space to continue the paragraph
             out_lines[-1] = out_lines[-1] + " " + text
-    return "\n".join(out_lines).strip() + "\n"
+    return sep.join(out_lines).strip() + "\n"
 
 def main():
     args = parse_args()
