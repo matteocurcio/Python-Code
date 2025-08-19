@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 """
-Clean transcript:
-- remove timecode lines like [09:43:41:02 - 09:43:41:13]
-- map 'Speaker 1' / 'Speaker 2' to user-defined names
-- merge consecutive blocks from the same speaker
+Author: Matteo Curcio
+Website: https://matteocurcio.com
+Email: hello@matteocurcio.com
+
+Description:
+    Clean Resolve transcripts by:
+    - Removing timecode lines like [00:00:43:03 - 00:00:48:08]
+    - Mapping 'Speaker 1' / 'Speaker 2' to user-defined names
+    - Merging consecutive blocks from the same speaker
 
 Usage:
-  python clean_transcript.py input.txt -o output.txt --s1 "John" --s2 "Mary"
+    python clean_transcript.py input.txt -o output.txt --s1 "Name1" --s2 "Name2"
+
+Example:
+    python clean_transcript.py raw.txt -o clean.txt --s1 "Justin" --s2 "Vasileios"
 """
 
 import argparse
